@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VolumeIQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="17" stroke="var(--accent)" stroke-width="1.5"/>
+        <path d="M10 22 Q14 10 18 18 Q22 26 26 14" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="18" cy="18" r="2.5" fill="var(--accent)"/>
+      </svg>
+      <span class="logo-text">Volume<b>IQ</b></span>
+    </div>
+    <div class="badge" id="statusBadge">OFF</div>
+  </header>
+
+  <div class="toggle-row">
+    <span class="toggle-label">Auto-Regulate Volume</span>
+    <label class="switch">
+      <input type="checkbox" id="toggleSwitch" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Scene detection strip -->
+  <div class="scene-strip" id="sceneStrip">
+    <div class="scene-chips">
+      <div class="chip" id="chip-SPEECH"><span class="chip-dot"></span>DIALOGUE</div>
+      <div class="chip" id="chip-ARGUMENT"><span class="chip-dot"></span>ARGUMENT</div>
+      <div class="chip" id="chip-SFX"><span class="chip-dot"></span>SFX / ACTION</div>
+      <div class="chip" id="chip-AMBIENT"><span class="chip-dot"></span>AMBIENT</div>
+    </div>
+    <div class="speech-bar-wrap">
+      <span class="speech-bar-label">SPEECH CONTENT</span>
+      <div class="speech-bar-track">
+        <div class="speech-bar-fill" id="speechBarFill"></div>
+      </div>
+      <span class="speech-pct" id="speechPct">—</span>
+    </div>
+  </div>
+
+  <!-- Live meter -->
+  <div class="meter-section" id="meterSection">
+    <div class="meter-header">
+      <span class="meter-title">LIVE LOUDNESS</span>
+      <span class="meter-value" id="loudnessVal">—</span>
+    </div>
+    <div class="meter-track">
+      <div class="meter-fill" id="meterFill"></div>
+      <div class="meter-baseline"></div>
+    </div>
+    <div class="meter-labels"><span>QUIET</span><span>BASELINE</span><span>LOUD</span></div>
+  </div>
+
+  <!-- Gain + lock -->
+  <div class="gain-row" id="gainRow">
+    <div class="gain-left">
+      <span class="gain-label">GAIN</span>
+      <div class="gain-pill" id="gainPill">
+        <svg id="gainArrow" viewBox="0 0 16 16" fill="none" width="11">
+          <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span id="gainVal">100%</span>
+      </div>
+    </div>
+    <button class="lock-btn" id="lockBtn">
+      <svg viewBox="0 0 20 20" fill="none" width="13">
+        <rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M7 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span id="lockLabel">Lock Level</span>
+    </button>
+  </div>
+
+  <!-- Comfort locked notice -->
+  <div class="comfort-bar" id="comfortBar">
+    <svg viewBox="0 0 16 16" fill="none" width="11" style="flex-shrink:0">
+      <rect x="3" y="8" width="10" height="7" rx="1.5" stroke="var(--accent3)" stroke-width="1.5"/>
+      <path d="M6 8V5.5a2 2 0 0 1 4 0V8" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span>Floor locked at <b id="floorVal">100%</b> — dialogue protected, SFX still ducked</span>
+    <button class="unlock-x" id="unlockBtn">✕</button>
+  </div>
+
+  <!-- Sensitivity -->
+  <div class="sensitivity-section">
+    <div class="sens-header">
+      <span>SENSITIVITY</span>
+      <span id="sensLabel">BALANCED</span>
+    </div>
+    <input type="range" id="sensitivitySlider" min="0" max="100" value="50" class="range-slider" />
+    <div class="sens-ticks"><span>GENTLE</span><span>BALANCED</span><span>REACTIVE</span></div>
+  </div>
+
+  <div class="info-strip">
+    <span id="infoText">Enable to start monitoring audio</span>
+  </div>
+
+  <footer>
+    <span>VolumeIQ v3</span>
+    <span id="sourceCount">0 source(s) detected</span>
+  </footer>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

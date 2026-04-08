@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "VolumeIQ – Auto Volume Optimizer",
+  "version": "3.0.0",
+  "description": "Automatically regulates volume based on scene loudness. Works on AnimePahe, Crunchyroll, Netflix, YouTube and more.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "tabCapture",
+    "offscreen"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches":    ["<all_urls>"],
+      "js":         ["content.js"],
+      "run_at":     "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

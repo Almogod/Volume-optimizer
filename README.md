@@ -1,4 +1,3 @@
-
 # VolumeIQ
 
 > **Real-time, scene-aware volume regulation for your browser.**  
